@@ -1,0 +1,980 @@
+openapi: 3.0.3
+info:
+  title: 'Mayeconcept Travel API'
+  description: 'Travel and tour Api'
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+paths:
+  /api/v1/admin/travels:
+    post:
+      summary: 'POST Travel'
+      operationId: pOSTTravel
+      description: 'create a new Travel record.'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 997279cb-a7ce-4f54-bbff-1bf44dbfda6d
+                    name: 'test name'
+                    slug: test-name
+                    description: 'test description'
+                    number_of_days: '5'
+                    number_of_nights: 4
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 997279cb-a7ce-4f54-bbff-1bf44dbfda6d
+                      name:
+                        type: string
+                        example: 'test name'
+                      slug:
+                        type: string
+                        example: test-name
+                      description:
+                        type: string
+                        example: 'test description'
+                      number_of_days:
+                        type: string
+                        example: '5'
+                      number_of_nights:
+                        type: integer
+                        example: 4
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error:
+                    name:
+                      - 'The name field is required.'
+                    description:
+                      - 'The description field is required.'
+                    number_of_days:
+                      - 'The number of days field is required.'
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      name:
+                        type: array
+                        example:
+                          - 'The name field is required.'
+                        items:
+                          type: string
+                      description:
+                        type: array
+                        example:
+                          - 'The description field is required.'
+                        items:
+                          type: string
+                      number_of_days:
+                        type: array
+                        example:
+                          - 'The number of days field is required.'
+                        items:
+                          type: string
+      tags:
+        - 'Admin endpoint'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                is_public:
+                  type: boolean
+                  description: 'if its true, then it is visible to the public, if not it is private.'
+                  example: true
+                name:
+                  type: string
+                  description: 'The name of the Travel.'
+                  example: 'test name'
+                description:
+                  type: string
+                  description: 'The description of the Travel.'
+                  example: 'test description'
+                number_of_days:
+                  type: integer
+                  description: 'The number of days of the Travel.'
+                  example: 5
+              required:
+                - is_public
+                - name
+                - description
+                - number_of_days
+  '/api/v1/admin/travels/{travel_id}/tours':
+    post:
+      summary: 'POST Tours'
+      operationId: pOSTTours
+      description: 'create a new Travel record.'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 99727b4e-7d45-48a7-9c05-3e4f2e3a51f2
+                    name: 'my tour'
+                    starting_date: '2023-06-18'
+                    ending_date: '2023-06-19'
+                    price: '3,000.00'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 99727b4e-7d45-48a7-9c05-3e4f2e3a51f2
+                      name:
+                        type: string
+                        example: 'my tour'
+                      starting_date:
+                        type: string
+                        example: '2023-06-18'
+                      ending_date:
+                        type: string
+                        example: '2023-06-19'
+                      price:
+                        type: string
+                        example: '3,000.00'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error:
+                    name:
+                      - 'The name field is required.'
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      name:
+                        type: array
+                        example:
+                          - 'The name field is required.'
+                        items:
+                          type: string
+      tags:
+        - 'Admin endpoint'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the tour.'
+                  example: 'test name'
+                starting_date:
+                  type: date
+                  description: 'The starting date of the tour.'
+                  example: '2023-06-18'
+                ending_date:
+                  type: date
+                  description: 'The ending date of the tour.'
+                  example: '2023-06-19'
+                price:
+                  type: number
+                  description: 'The price of the tour.'
+                  example: 1000.99
+                travel_id:
+                  type: uuid
+                  description: 'The id of the travel.'
+                  example: 996b7ae3-5b1a-4155-91b8-423826824fca
+              required:
+                - name
+                - starting_date
+                - ending_date
+                - price
+                - travel_id
+    parameters:
+      -
+        in: path
+        name: travel_id
+        description: 'The ID of the travel.'
+        example: 996b7ad5-b57a-498c-8568-0b388b42c1e6
+        required: true
+        schema:
+          type: string
+  '/api/v1/admin/travels/{travel_id}':
+    put:
+      summary: 'PUT Travel'
+      operationId: pUTTravel
+      description: 'update Travel record.'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 997279cb-a7ce-4f54-bbff-1bf44dbfda6d
+                    name: 'test name'
+                    slug: test-name
+                    description: 'test description'
+                    number_of_days: '5'
+                    number_of_nights: 4
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 997279cb-a7ce-4f54-bbff-1bf44dbfda6d
+                      name:
+                        type: string
+                        example: 'test name'
+                      slug:
+                        type: string
+                        example: test-name
+                      description:
+                        type: string
+                        example: 'test description'
+                      number_of_days:
+                        type: string
+                        example: '5'
+                      number_of_nights:
+                        type: integer
+                        example: 4
+        422:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: '{ "error": { "description": [ "The description field is required." ], "number_of_days": [ "The number of days field is required." } }'
+      tags:
+        - 'Admin endpoint'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                is_public:
+                  type: boolean
+                  description: 'if its true, then it is visible to the public, if not it is private.'
+                  example: true
+                name:
+                  type: string
+                  description: 'The name of the Travel.'
+                  example: 'test name'
+                description:
+                  type: string
+                  description: 'The description of the Travel.'
+                  example: 'test description'
+                number_of_days:
+                  type: integer
+                  description: 'The number of days of the Travel.'
+                  example: 5
+              required:
+                - is_public
+                - name
+                - description
+                - number_of_days
+    parameters:
+      -
+        in: path
+        name: travel_id
+        description: 'The ID of the travel.'
+        example: 996b7ad5-b57a-498c-8568-0b388b42c1e6
+        required: true
+        schema:
+          type: string
+  /api/v1/travels:
+    get:
+      summary: 'GET Travel'
+      operationId: gETTravel
+      description: 'Get all Public Travel records.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 996b7ad5-b57a-498c-8568-0b388b42c1e6
+                      name: 'something name'
+                      slug: something-name
+                      description: aaa
+                      number_of_days: 5
+                      number_of_nights: 4
+                    -
+                      id: 996b7ae3-5b1a-4155-91b8-423826824fca
+                      name: 'something name'
+                      slug: something-name-2
+                      description: aaa
+                      number_of_days: 5
+                      number_of_nights: 4
+                    -
+                      id: 996b7aed-3bc5-45c5-a1ad-4268e800e027
+                      name: 'something name'
+                      slug: something-name-3
+                      description: aaa
+                      number_of_days: 5
+                      number_of_nights: 4
+                    -
+                      id: 996c59dc-0a27-44de-94af-41df25c2164b
+                      name: 'Illum ipsa ea ut.'
+                      slug: illum-ipsa-ea-ut
+                      description: 'Rerum id neque ut. Consequatur aut et sed omnis eum.'
+                      number_of_days: 8
+                      number_of_nights: 7
+                    -
+                      id: 996c5a0a-2dc9-480b-b100-eaaf9707b242
+                      name: 'Eveniet reiciendis.'
+                      slug: eveniet-reiciendis
+                      description: 'Nihil sequi est quasi sint delectus. Praesentium minima impedit id nesciunt impedit.'
+                      number_of_days: 8
+                      number_of_nights: 7
+                    -
+                      id: 996ed21d-7af6-42f4-a340-650d8a2118bb
+                      name: 'my name nh'
+                      slug: my-name-nh
+                      description: 'my description'
+                      number_of_days: 6
+                      number_of_nights: 5
+                    -
+                      id: 996ed25b-180f-4ddf-b2a0-c48d2d99b764
+                      name: 'my name'
+                      slug: my-name
+                      description: 'my description'
+                      number_of_days: 6
+                      number_of_nights: 5
+                    -
+                      id: 997279cb-a7ce-4f54-bbff-1bf44dbfda6d
+                      name: 'test name'
+                      slug: test-name
+                      description: 'test description'
+                      number_of_days: 5
+                      number_of_nights: 4
+                  links:
+                    first: 'http://127.0.0.1:8000/api/v1/travels?page=1'
+                    last: 'http://127.0.0.1:8000/api/v1/travels?page=1'
+                    prev: null
+                    next: null
+                  meta:
+                    current_page: 1
+                    from: 1
+                    last_page: 1
+                    links:
+                      -
+                        url: null
+                        label: '&laquo; Previous'
+                        active: false
+                      -
+                        url: 'http://127.0.0.1:8000/api/v1/travels?page=1'
+                        label: '1'
+                        active: true
+                      -
+                        url: null
+                        label: 'Next &raquo;'
+                        active: false
+                    path: 'http://127.0.0.1:8000/api/v1/travels'
+                    per_page: 15
+                    to: 8
+                    total: 8
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 996b7ad5-b57a-498c-8568-0b388b42c1e6
+                        name: 'something name'
+                        slug: something-name
+                        description: aaa
+                        number_of_days: 5
+                        number_of_nights: 4
+                      -
+                        id: 996b7ae3-5b1a-4155-91b8-423826824fca
+                        name: 'something name'
+                        slug: something-name-2
+                        description: aaa
+                        number_of_days: 5
+                        number_of_nights: 4
+                      -
+                        id: 996b7aed-3bc5-45c5-a1ad-4268e800e027
+                        name: 'something name'
+                        slug: something-name-3
+                        description: aaa
+                        number_of_days: 5
+                        number_of_nights: 4
+                      -
+                        id: 996c59dc-0a27-44de-94af-41df25c2164b
+                        name: 'Illum ipsa ea ut.'
+                        slug: illum-ipsa-ea-ut
+                        description: 'Rerum id neque ut. Consequatur aut et sed omnis eum.'
+                        number_of_days: 8
+                        number_of_nights: 7
+                      -
+                        id: 996c5a0a-2dc9-480b-b100-eaaf9707b242
+                        name: 'Eveniet reiciendis.'
+                        slug: eveniet-reiciendis
+                        description: 'Nihil sequi est quasi sint delectus. Praesentium minima impedit id nesciunt impedit.'
+                        number_of_days: 8
+                        number_of_nights: 7
+                      -
+                        id: 996ed21d-7af6-42f4-a340-650d8a2118bb
+                        name: 'my name nh'
+                        slug: my-name-nh
+                        description: 'my description'
+                        number_of_days: 6
+                        number_of_nights: 5
+                      -
+                        id: 996ed25b-180f-4ddf-b2a0-c48d2d99b764
+                        name: 'my name'
+                        slug: my-name
+                        description: 'my description'
+                        number_of_days: 6
+                        number_of_nights: 5
+                      -
+                        id: 997279cb-a7ce-4f54-bbff-1bf44dbfda6d
+                        name: 'test name'
+                        slug: test-name
+                        description: 'test description'
+                        number_of_days: 5
+                        number_of_nights: 4
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: 996b7ad5-b57a-498c-8568-0b388b42c1e6
+                        name:
+                          type: string
+                          example: 'something name'
+                        slug:
+                          type: string
+                          example: something-name
+                        description:
+                          type: string
+                          example: aaa
+                        number_of_days:
+                          type: integer
+                          example: 5
+                        number_of_nights:
+                          type: integer
+                          example: 4
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                        example: 'http://127.0.0.1:8000/api/v1/travels?page=1'
+                      last:
+                        type: string
+                        example: 'http://127.0.0.1:8000/api/v1/travels?page=1'
+                      prev:
+                        type: string
+                        example: null
+                      next:
+                        type: string
+                        example: null
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: integer
+                        example: 1
+                      from:
+                        type: integer
+                        example: 1
+                      last_page:
+                        type: integer
+                        example: 1
+                      links:
+                        type: array
+                        example:
+                          -
+                            url: null
+                            label: '&laquo; Previous'
+                            active: false
+                          -
+                            url: 'http://127.0.0.1:8000/api/v1/travels?page=1'
+                            label: '1'
+                            active: true
+                          -
+                            url: null
+                            label: 'Next &raquo;'
+                            active: false
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                              example: null
+                            label:
+                              type: string
+                              example: '&laquo; Previous'
+                            active:
+                              type: boolean
+                              example: false
+                      path:
+                        type: string
+                        example: 'http://127.0.0.1:8000/api/v1/travels'
+                      per_page:
+                        type: integer
+                        example: 15
+                      to:
+                        type: integer
+                        example: 8
+                      total:
+                        type: integer
+                        example: 8
+      tags:
+        - Endpoints
+      security: []
+  '/api/v1/travels/{travel_slug}/tours':
+    get:
+      summary: 'GET Tour'
+      operationId: gETTour
+      description: 'Get specific Tour record.'
+      parameters:
+        -
+          in: query
+          name: priceFrom
+          description: 'optional The filter prices from a specific price.'
+          example: '2000'
+          required: false
+          schema:
+            type: string
+            description: 'optional The filter prices from a specific price.'
+            example: '2000'
+        -
+          in: query
+          name: priceTo
+          description: 'optional The filter prices to a specific price.'
+          example: '900'
+          required: false
+          schema:
+            type: string
+            description: 'optional The filter prices to a specific price.'
+            example: '900'
+        -
+          in: query
+          name: dateFrom
+          description: 'optional The filter date from a specific date.'
+          example: '2023-06-18'
+          required: false
+          schema:
+            type: string
+            description: 'optional The filter date from a specific date.'
+            example: '2023-06-18'
+        -
+          in: query
+          name: dateTo
+          description: 'optional The filter date to a specific date.'
+          example: '2023-06-18'
+          required: false
+          schema:
+            type: string
+            description: 'optional The filter date to a specific date.'
+            example: '2023-06-18'
+        -
+          in: query
+          name: sortBy
+          description: 'optional Sort record in specific order.'
+          example: officiis
+          required: false
+          schema:
+            type: string
+            description: 'optional Sort record in specific order.'
+            example: officiis
+        -
+          in: query
+          name: sortOrder
+          description: 'optional Sort record in specific order.'
+          example: eius
+          required: false
+          schema:
+            type: string
+            description: 'optional Sort record in specific order.'
+            example: eius
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 996c619f-8838-4782-8005-8d9e48b94b57
+                      name: 'Ex qui quasi.'
+                      starting_date: '2023-06-16'
+                      ending_date: '2023-06-25'
+                      price: '866.17'
+                    -
+                      id: 996c6831-731c-46dd-858a-8dfa600ea15e
+                      name: 'Sint consectetur.'
+                      starting_date: '2023-06-16'
+                      ending_date: '2023-06-20'
+                      price: '636.40'
+                    -
+                      id: 996c6831-90ca-4cff-9375-016500eb3b2c
+                      name: 'Nemo voluptatum.'
+                      starting_date: '2023-06-16'
+                      ending_date: '2023-06-25'
+                      price: '174.47'
+                    -
+                      id: 996c6831-b074-4621-9981-a8f7426c321b
+                      name: 'Ut blanditiis nemo.'
+                      starting_date: '2023-06-16'
+                      ending_date: '2023-06-22'
+                      price: '626.73'
+                    -
+                      id: 996c6831-e334-44d5-93d7-a46b66cf7dfb
+                      name: 'Ipsum optio sint ex.'
+                      starting_date: '2023-06-16'
+                      ending_date: '2023-06-22'
+                      price: '199.18'
+                  links:
+                    first: 'http://127.0.0.1:8000/api/v1/travels/velit-nulla-nemo/tours?page=1'
+                    last: 'http://127.0.0.1:8000/api/v1/travels/velit-nulla-nemo/tours?page=1'
+                    prev: null
+                    next: null
+                  meta:
+                    current_page: 1
+                    from: 1
+                    last_page: 1
+                    links:
+                      -
+                        url: null
+                        label: '&laquo; Previous'
+                        active: false
+                      -
+                        url: 'http://127.0.0.1:8000/api/v1/travels/velit-nulla-nemo/tours?page=1'
+                        label: '1'
+                        active: true
+                      -
+                        url: null
+                        label: 'Next &raquo;'
+                        active: false
+                    path: 'http://127.0.0.1:8000/api/v1/travels/velit-nulla-nemo/tours'
+                    per_page: 15
+                    to: 5
+                    total: 5
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 996c619f-8838-4782-8005-8d9e48b94b57
+                        name: 'Ex qui quasi.'
+                        starting_date: '2023-06-16'
+                        ending_date: '2023-06-25'
+                        price: '866.17'
+                      -
+                        id: 996c6831-731c-46dd-858a-8dfa600ea15e
+                        name: 'Sint consectetur.'
+                        starting_date: '2023-06-16'
+                        ending_date: '2023-06-20'
+                        price: '636.40'
+                      -
+                        id: 996c6831-90ca-4cff-9375-016500eb3b2c
+                        name: 'Nemo voluptatum.'
+                        starting_date: '2023-06-16'
+                        ending_date: '2023-06-25'
+                        price: '174.47'
+                      -
+                        id: 996c6831-b074-4621-9981-a8f7426c321b
+                        name: 'Ut blanditiis nemo.'
+                        starting_date: '2023-06-16'
+                        ending_date: '2023-06-22'
+                        price: '626.73'
+                      -
+                        id: 996c6831-e334-44d5-93d7-a46b66cf7dfb
+                        name: 'Ipsum optio sint ex.'
+                        starting_date: '2023-06-16'
+                        ending_date: '2023-06-22'
+                        price: '199.18'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: 996c619f-8838-4782-8005-8d9e48b94b57
+                        name:
+                          type: string
+                          example: 'Ex qui quasi.'
+                        starting_date:
+                          type: string
+                          example: '2023-06-16'
+                        ending_date:
+                          type: string
+                          example: '2023-06-25'
+                        price:
+                          type: string
+                          example: '866.17'
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                        example: 'http://127.0.0.1:8000/api/v1/travels/velit-nulla-nemo/tours?page=1'
+                      last:
+                        type: string
+                        example: 'http://127.0.0.1:8000/api/v1/travels/velit-nulla-nemo/tours?page=1'
+                      prev:
+                        type: string
+                        example: null
+                      next:
+                        type: string
+                        example: null
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: integer
+                        example: 1
+                      from:
+                        type: integer
+                        example: 1
+                      last_page:
+                        type: integer
+                        example: 1
+                      links:
+                        type: array
+                        example:
+                          -
+                            url: null
+                            label: '&laquo; Previous'
+                            active: false
+                          -
+                            url: 'http://127.0.0.1:8000/api/v1/travels/velit-nulla-nemo/tours?page=1'
+                            label: '1'
+                            active: true
+                          -
+                            url: null
+                            label: 'Next &raquo;'
+                            active: false
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                              example: null
+                            label:
+                              type: string
+                              example: '&laquo; Previous'
+                            active:
+                              type: boolean
+                              example: false
+                      path:
+                        type: string
+                        example: 'http://127.0.0.1:8000/api/v1/travels/velit-nulla-nemo/tours'
+                      per_page:
+                        type: integer
+                        example: 15
+                      to:
+                        type: integer
+                        example: 5
+                      total:
+                        type: integer
+                        example: 5
+      tags:
+        - Endpoints
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                priceFrom:
+                  type: number
+                  description: ''
+                  example: 8.389872996
+                priceTo:
+                  type: number
+                  description: ''
+                  example: 79540.1043
+                dateFrom:
+                  type: string
+                  description: 'Must be a valid date.'
+                  example: '2023-06-19T11:11:57'
+                dateTo:
+                  type: string
+                  description: 'Must be a valid date.'
+                  example: '2023-06-19T11:11:57'
+                sortBy:
+                  type: string
+                  description: 'Must be one of <code>price</code>.'
+                  example: price
+                sortOrder:
+                  type: string
+                  description: 'Must be one of <code>asc</code> or <code>desc</code>.'
+                  example: desc
+      security: []
+    parameters:
+      -
+        in: path
+        name: travel_slug
+        description: 'The slug of the travel.'
+        example: 996b7ad5-b57a-498c-8568-0b388b42c1e6
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: slug
+        description: 'The slug of the travel.'
+        example: maiores
+        required: true
+        schema:
+          type: string
+  /api/v1/login:
+    post:
+      summary: 'Handle the incoming request.'
+      operationId: handleTheIncomingRequest
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  name: MayeJacob
+                  access_token: 6|QQC2acm4f2OTb5iMBjvo99jJ7fz0aU44JpjJ26vM
+                properties:
+                  name:
+                    type: string
+                    example: MayeJacob
+                  access_token:
+                    type: string
+                    example: 6|QQC2acm4f2OTb5iMBjvo99jJ7fz0aU44JpjJ26vM
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'The email of the User.'
+                  example: test@g.co
+                password:
+                  type: string
+                  description: 'The password of the User.'
+                  example: 'Nr;kI<(R[&|:T*MMN'
+              required:
+                - email
+                - password
+      security: []
+  /api/v1/test:
+    get:
+      summary: ''
+      operationId: getApiV1Test
+      description: ''
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  name: 'Tiffany Stanton'
+                  email: cleora63@example.org
+                  email_verified_at: '2023-06-19T11:11:57.000000Z'
+                  id: 99728f6f-09d1-4e51-a21f-b3f32068eb85
+                  updated_at: '2023-06-19T11:11:57.000000Z'
+                  created_at: '2023-06-19T11:11:57.000000Z'
+                properties:
+                  name:
+                    type: string
+                    example: 'Tiffany Stanton'
+                  email:
+                    type: string
+                    example: cleora63@example.org
+                  email_verified_at:
+                    type: string
+                    example: '2023-06-19T11:11:57.000000Z'
+                  id:
+                    type: string
+                    example: 99728f6f-09d1-4e51-a21f-b3f32068eb85
+                  updated_at:
+                    type: string
+                    example: '2023-06-19T11:11:57.000000Z'
+                  created_at:
+                    type: string
+                    example: '2023-06-19T11:11:57.000000Z'
+      tags:
+        - Endpoints
+      security: []
+tags:
+  -
+    name: 'Admin endpoint'
+    description: ''
+  -
+    name: Endpoints
+    description: ''
+components:
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer
+      description: ''
+security:
+  -
+    default: []

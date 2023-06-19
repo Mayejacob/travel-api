@@ -1,0 +1,280 @@
+name: Endpoints
+description: ''
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/travels
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'GET Travel'
+      description: 'Get all Public Travel records.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":[{"id":"996b7ad5-b57a-498c-8568-0b388b42c1e6","name":"something name","slug":"something-name","description":"aaa","number_of_days":5,"number_of_nights":4},{"id":"996b7ae3-5b1a-4155-91b8-423826824fca","name":"something name","slug":"something-name-2","description":"aaa","number_of_days":5,"number_of_nights":4},{"id":"996b7aed-3bc5-45c5-a1ad-4268e800e027","name":"something name","slug":"something-name-3","description":"aaa","number_of_days":5,"number_of_nights":4},{"id":"996c59dc-0a27-44de-94af-41df25c2164b","name":"Illum ipsa ea ut.","slug":"illum-ipsa-ea-ut","description":"Rerum id neque ut. Consequatur aut et sed omnis eum.","number_of_days":8,"number_of_nights":7},{"id":"996c5a0a-2dc9-480b-b100-eaaf9707b242","name":"Eveniet reiciendis.","slug":"eveniet-reiciendis","description":"Nihil sequi est quasi sint delectus. Praesentium minima impedit id nesciunt impedit.","number_of_days":8,"number_of_nights":7},{"id":"996ed21d-7af6-42f4-a340-650d8a2118bb","name":"my name nh","slug":"my-name-nh","description":"my description","number_of_days":6,"number_of_nights":5},{"id":"996ed25b-180f-4ddf-b2a0-c48d2d99b764","name":"my name","slug":"my-name","description":"my description","number_of_days":6,"number_of_nights":5},{"id":"997279cb-a7ce-4f54-bbff-1bf44dbfda6d","name":"test name","slug":"test-name","description":"test description","number_of_days":5,"number_of_nights":4}],"links":{"first":"http:\/\/127.0.0.1:8000\/api\/v1\/travels?page=1","last":"http:\/\/127.0.0.1:8000\/api\/v1\/travels?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/127.0.0.1:8000\/api\/v1\/travels?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"path":"http:\/\/127.0.0.1:8000\/api\/v1\/travels","per_page":15,"to":8,"total":8}}'
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/travels/{travel_slug}/tours'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'GET Tour'
+      description: 'Get specific Tour record.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      travel_slug:
+        name: travel_slug
+        description: 'The slug of the travel.'
+        required: true
+        example: 996b7ad5-b57a-498c-8568-0b388b42c1e6
+        type: string
+        custom: []
+      slug:
+        name: slug
+        description: 'The slug of the travel.'
+        required: true
+        example: maiores
+        type: string
+        custom: []
+    cleanUrlParameters:
+      travel_slug: 996b7ad5-b57a-498c-8568-0b388b42c1e6
+      slug: maiores
+    queryParameters:
+      priceFrom:
+        name: priceFrom
+        description: 'optional The filter prices from a specific price.'
+        required: false
+        example: '2000'
+        type: string
+        custom: []
+      priceTo:
+        name: priceTo
+        description: 'optional The filter prices to a specific price.'
+        required: false
+        example: '900'
+        type: string
+        custom: []
+      dateFrom:
+        name: dateFrom
+        description: 'optional The filter date from a specific date.'
+        required: false
+        example: '2023-06-18'
+        type: string
+        custom: []
+      dateTo:
+        name: dateTo
+        description: 'optional The filter date to a specific date.'
+        required: false
+        example: '2023-06-18'
+        type: string
+        custom: []
+      sortBy:
+        name: sortBy
+        description: 'optional Sort record in specific order.'
+        required: false
+        example: officiis
+        type: string
+        custom: []
+      sortOrder:
+        name: sortOrder
+        description: 'optional Sort record in specific order.'
+        required: false
+        example: eius
+        type: string
+        custom: []
+    cleanQueryParameters:
+      priceFrom: '2000'
+      priceTo: '900'
+      dateFrom: '2023-06-18'
+      dateTo: '2023-06-18'
+      sortBy: officiis
+      sortOrder: eius
+    bodyParameters:
+      priceFrom:
+        name: priceFrom
+        description: ''
+        required: false
+        example: 8.389872996
+        type: number
+        custom: []
+      priceTo:
+        name: priceTo
+        description: ''
+        required: false
+        example: 79540.1043
+        type: number
+        custom: []
+      dateFrom:
+        name: dateFrom
+        description: 'Must be a valid date.'
+        required: false
+        example: '2023-06-19T11:11:57'
+        type: string
+        custom: []
+      dateTo:
+        name: dateTo
+        description: 'Must be a valid date.'
+        required: false
+        example: '2023-06-19T11:11:57'
+        type: string
+        custom: []
+      sortBy:
+        name: sortBy
+        description: 'Must be one of <code>price</code>.'
+        required: false
+        example: price
+        type: string
+        custom: []
+      sortOrder:
+        name: sortOrder
+        description: 'Must be one of <code>asc</code> or <code>desc</code>.'
+        required: false
+        example: desc
+        type: string
+        custom: []
+    cleanBodyParameters:
+      priceFrom: 8.389872996
+      priceTo: 79540.1043
+      dateFrom: '2023-06-19T11:11:57'
+      dateTo: '2023-06-19T11:11:57'
+      sortBy: price
+      sortOrder: desc
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":[{"id":"996c619f-8838-4782-8005-8d9e48b94b57","name":"Ex qui quasi.","starting_date":"2023-06-16","ending_date":"2023-06-25","price":"866.17"},{"id":"996c6831-731c-46dd-858a-8dfa600ea15e","name":"Sint consectetur.","starting_date":"2023-06-16","ending_date":"2023-06-20","price":"636.40"},{"id":"996c6831-90ca-4cff-9375-016500eb3b2c","name":"Nemo voluptatum.","starting_date":"2023-06-16","ending_date":"2023-06-25","price":"174.47"},{"id":"996c6831-b074-4621-9981-a8f7426c321b","name":"Ut blanditiis nemo.","starting_date":"2023-06-16","ending_date":"2023-06-22","price":"626.73"},{"id":"996c6831-e334-44d5-93d7-a46b66cf7dfb","name":"Ipsum optio sint ex.","starting_date":"2023-06-16","ending_date":"2023-06-22","price":"199.18"}],"links":{"first":"http:\/\/127.0.0.1:8000\/api\/v1\/travels\/velit-nulla-nemo\/tours?page=1","last":"http:\/\/127.0.0.1:8000\/api\/v1\/travels\/velit-nulla-nemo\/tours?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/127.0.0.1:8000\/api\/v1\/travels\/velit-nulla-nemo\/tours?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"path":"http:\/\/127.0.0.1:8000\/api\/v1\/travels\/velit-nulla-nemo\/tours","per_page":15,"to":5,"total":5}}'
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/login
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Handle the incoming request.'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      email:
+        name: email
+        description: 'The email of the User.'
+        required: true
+        example: test@g.co
+        type: string
+        custom: []
+      password:
+        name: password
+        description: 'The password of the User.'
+        required: true
+        example: 'Nr;kI<(R[&|:T*MMN'
+        type: string
+        custom: []
+    cleanBodyParameters:
+      email: test@g.co
+      password: 'Nr;kI<(R[&|:T*MMN'
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"name":"MayeJacob","access_token":"6|QQC2acm4f2OTb5iMBjvo99jJ7fz0aU44JpjJ26vM"}'
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/test
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 201
+        content: '{"name":"Tiffany Stanton","email":"cleora63@example.org","email_verified_at":"2023-06-19T11:11:57.000000Z","id":"99728f6f-09d1-4e51-a21f-b3f32068eb85","updated_at":"2023-06-19T11:11:57.000000Z","created_at":"2023-06-19T11:11:57.000000Z"}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '59'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []

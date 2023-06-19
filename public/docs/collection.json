@@ -1,0 +1,398 @@
+{
+    "variable": [
+        {
+            "id": "baseUrl",
+            "key": "baseUrl",
+            "type": "string",
+            "name": "string",
+            "value": "http:\/\/localhost"
+        }
+    ],
+    "info": {
+        "name": "Mayeconcept Travel API",
+        "_postman_id": "0c909b1f-b750-4465-a458-303e03e7f93b",
+        "description": "Travel and tour Api",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "Admin endpoint",
+            "description": "",
+            "item": [
+                {
+                    "name": "POST Travel",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/admin\/travels",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/admin\/travels"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"is_public\":true,\"name\":\"test name\",\"description\":\"test description\",\"number_of_days\":5}"
+                        },
+                        "description": "create a new Travel record."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{ \"data\": { \"id\": \"997279cb-a7ce-4f54-bbff-1bf44dbfda6d\", \"name\": \"test name\", \"slug\": \"test-name\", \"description\": \"test description\", \"number_of_days\": \"5\", \"number_of_nights\": 4 } }",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\"error\":{\"name\":[\"The name field is required.\"],\"description\":[\"The description field is required.\"],\"number_of_days\":[\"The number of days field is required.\"]}}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "POST Tours",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/admin\/travels\/:travel_id\/tours",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/admin\/travels\/:travel_id\/tours",
+                            "variable": [
+                                {
+                                    "id": "travel_id",
+                                    "key": "travel_id",
+                                    "value": "996b7ad5-b57a-498c-8568-0b388b42c1e6",
+                                    "description": "The ID of the travel."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"test name\",\"starting_date\":\"2023-06-18\",\"ending_date\":\"2023-06-19\",\"price\":1000.99,\"travel_id\":\"996b7ae3-5b1a-4155-91b8-423826824fca\"}"
+                        },
+                        "description": "create a new Travel record."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{ \"data\": { \"id\": \"99727b4e-7d45-48a7-9c05-3e4f2e3a51f2\", \"name\": \"my tour\",  \"starting_date\": \"2023-06-18\", \"ending_date\": \"2023-06-19\",\"price\": \"3,000.00\" } }",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{ \"error\": { \"name\": [ \"The name field is required.\"   ] } }",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "PUT Travel",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/admin\/travels\/:travel_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/admin\/travels\/:travel_id",
+                            "variable": [
+                                {
+                                    "id": "travel_id",
+                                    "key": "travel_id",
+                                    "value": "996b7ad5-b57a-498c-8568-0b388b42c1e6",
+                                    "description": "The ID of the travel."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"is_public\":true,\"name\":\"test name\",\"description\":\"test description\",\"number_of_days\":5}"
+                        },
+                        "description": "update Travel record."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{ \"data\": { \"id\": \"997279cb-a7ce-4f54-bbff-1bf44dbfda6d\", \"name\": \"test name\", \"slug\": \"test-name\", \"description\": \"test description\", \"number_of_days\": \"5\", \"number_of_nights\": 4 } }",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{ \"error\": { \"description\": [ \"The description field is required.\" ], \"number_of_days\": [ \"The number of days field is required.\" } }",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Endpoints",
+            "description": "",
+            "item": [
+                {
+                    "name": "GET Travel",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/travels",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/travels"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Get all Public Travel records.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"data\":[{\"id\":\"996b7ad5-b57a-498c-8568-0b388b42c1e6\",\"name\":\"something name\",\"slug\":\"something-name\",\"description\":\"aaa\",\"number_of_days\":5,\"number_of_nights\":4},{\"id\":\"996b7ae3-5b1a-4155-91b8-423826824fca\",\"name\":\"something name\",\"slug\":\"something-name-2\",\"description\":\"aaa\",\"number_of_days\":5,\"number_of_nights\":4},{\"id\":\"996b7aed-3bc5-45c5-a1ad-4268e800e027\",\"name\":\"something name\",\"slug\":\"something-name-3\",\"description\":\"aaa\",\"number_of_days\":5,\"number_of_nights\":4},{\"id\":\"996c59dc-0a27-44de-94af-41df25c2164b\",\"name\":\"Illum ipsa ea ut.\",\"slug\":\"illum-ipsa-ea-ut\",\"description\":\"Rerum id neque ut. Consequatur aut et sed omnis eum.\",\"number_of_days\":8,\"number_of_nights\":7},{\"id\":\"996c5a0a-2dc9-480b-b100-eaaf9707b242\",\"name\":\"Eveniet reiciendis.\",\"slug\":\"eveniet-reiciendis\",\"description\":\"Nihil sequi est quasi sint delectus. Praesentium minima impedit id nesciunt impedit.\",\"number_of_days\":8,\"number_of_nights\":7},{\"id\":\"996ed21d-7af6-42f4-a340-650d8a2118bb\",\"name\":\"my name nh\",\"slug\":\"my-name-nh\",\"description\":\"my description\",\"number_of_days\":6,\"number_of_nights\":5},{\"id\":\"996ed25b-180f-4ddf-b2a0-c48d2d99b764\",\"name\":\"my name\",\"slug\":\"my-name\",\"description\":\"my description\",\"number_of_days\":6,\"number_of_nights\":5},{\"id\":\"997279cb-a7ce-4f54-bbff-1bf44dbfda6d\",\"name\":\"test name\",\"slug\":\"test-name\",\"description\":\"test description\",\"number_of_days\":5,\"number_of_nights\":4}],\"links\":{\"first\":\"http:\\\/\\\/127.0.0.1:8000\\\/api\\\/v1\\\/travels?page=1\",\"last\":\"http:\\\/\\\/127.0.0.1:8000\\\/api\\\/v1\\\/travels?page=1\",\"prev\":null,\"next\":null},\"meta\":{\"current_page\":1,\"from\":1,\"last_page\":1,\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"active\":false},{\"url\":\"http:\\\/\\\/127.0.0.1:8000\\\/api\\\/v1\\\/travels?page=1\",\"label\":\"1\",\"active\":true},{\"url\":null,\"label\":\"Next &raquo;\",\"active\":false}],\"path\":\"http:\\\/\\\/127.0.0.1:8000\\\/api\\\/v1\\\/travels\",\"per_page\":15,\"to\":8,\"total\":8}}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET Tour",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/travels\/:travel_slug\/tours",
+                            "query": [
+                                {
+                                    "key": "priceFrom",
+                                    "value": "2000",
+                                    "description": "optional The filter prices from a specific price.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "priceTo",
+                                    "value": "900",
+                                    "description": "optional The filter prices to a specific price.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "dateFrom",
+                                    "value": "2023-06-18",
+                                    "description": "optional The filter date from a specific date.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "dateTo",
+                                    "value": "2023-06-18",
+                                    "description": "optional The filter date to a specific date.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "sortBy",
+                                    "value": "officiis",
+                                    "description": "optional Sort record in specific order.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "sortOrder",
+                                    "value": "eius",
+                                    "description": "optional Sort record in specific order.",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/api\/v1\/travels\/:travel_slug\/tours?priceFrom=2000&priceTo=900&dateFrom=2023-06-18&dateTo=2023-06-18&sortBy=officiis&sortOrder=eius",
+                            "variable": [
+                                {
+                                    "id": "travel_slug",
+                                    "key": "travel_slug",
+                                    "value": "996b7ad5-b57a-498c-8568-0b388b42c1e6",
+                                    "description": "The slug of the travel."
+                                },
+                                {
+                                    "id": "slug",
+                                    "key": "slug",
+                                    "value": "maiores",
+                                    "description": "The slug of the travel."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"priceFrom\":8.389872996,\"priceTo\":79540.1043,\"dateFrom\":\"2023-06-19T11:11:57\",\"dateTo\":\"2023-06-19T11:11:57\",\"sortBy\":\"price\",\"sortOrder\":\"desc\"}"
+                        },
+                        "description": "Get specific Tour record.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"data\":[{\"id\":\"996c619f-8838-4782-8005-8d9e48b94b57\",\"name\":\"Ex qui quasi.\",\"starting_date\":\"2023-06-16\",\"ending_date\":\"2023-06-25\",\"price\":\"866.17\"},{\"id\":\"996c6831-731c-46dd-858a-8dfa600ea15e\",\"name\":\"Sint consectetur.\",\"starting_date\":\"2023-06-16\",\"ending_date\":\"2023-06-20\",\"price\":\"636.40\"},{\"id\":\"996c6831-90ca-4cff-9375-016500eb3b2c\",\"name\":\"Nemo voluptatum.\",\"starting_date\":\"2023-06-16\",\"ending_date\":\"2023-06-25\",\"price\":\"174.47\"},{\"id\":\"996c6831-b074-4621-9981-a8f7426c321b\",\"name\":\"Ut blanditiis nemo.\",\"starting_date\":\"2023-06-16\",\"ending_date\":\"2023-06-22\",\"price\":\"626.73\"},{\"id\":\"996c6831-e334-44d5-93d7-a46b66cf7dfb\",\"name\":\"Ipsum optio sint ex.\",\"starting_date\":\"2023-06-16\",\"ending_date\":\"2023-06-22\",\"price\":\"199.18\"}],\"links\":{\"first\":\"http:\\\/\\\/127.0.0.1:8000\\\/api\\\/v1\\\/travels\\\/velit-nulla-nemo\\\/tours?page=1\",\"last\":\"http:\\\/\\\/127.0.0.1:8000\\\/api\\\/v1\\\/travels\\\/velit-nulla-nemo\\\/tours?page=1\",\"prev\":null,\"next\":null},\"meta\":{\"current_page\":1,\"from\":1,\"last_page\":1,\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"active\":false},{\"url\":\"http:\\\/\\\/127.0.0.1:8000\\\/api\\\/v1\\\/travels\\\/velit-nulla-nemo\\\/tours?page=1\",\"label\":\"1\",\"active\":true},{\"url\":null,\"label\":\"Next &raquo;\",\"active\":false}],\"path\":\"http:\\\/\\\/127.0.0.1:8000\\\/api\\\/v1\\\/travels\\\/velit-nulla-nemo\\\/tours\",\"per_page\":15,\"to\":5,\"total\":5}}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Handle the incoming request.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/login",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/login"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\":\"test@g.co\",\"password\":\"Nr;kI<(R[&|:T*MMN\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"name\":\"MayeJacob\",\"access_token\":\"6|QQC2acm4f2OTb5iMBjvo99jJ7fz0aU44JpjJ26vM\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/v1\/test",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/test",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/test"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "x-ratelimit-limit",
+                                    "value": "60"
+                                },
+                                {
+                                    "key": "x-ratelimit-remaining",
+                                    "value": "59"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 201,
+                            "body": "{\"name\":\"Tiffany Stanton\",\"email\":\"cleora63@example.org\",\"email_verified_at\":\"2023-06-19T11:11:57.000000Z\",\"id\":\"99728f6f-09d1-4e51-a21f-b3f32068eb85\",\"updated_at\":\"2023-06-19T11:11:57.000000Z\",\"created_at\":\"2023-06-19T11:11:57.000000Z\"}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "bearer",
+        "bearer": [
+            {
+                "key": "key",
+                "value": null,
+                "type": "string"
+            }
+        ]
+    }
+}

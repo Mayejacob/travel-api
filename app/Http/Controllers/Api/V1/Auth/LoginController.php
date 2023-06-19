@@ -12,6 +12,9 @@ class LoginController extends Controller
 {
     /**
      * Handle the incoming request.
+     * @bodyParam email string required The email of the User. Example: test@g.co
+     * @bodyParam password string required The password of the User.
+     * @response {"name":"MayeJacob","access_token":"6|QQC2acm4f2OTb5iMBjvo99jJ7fz0aU44JpjJ26vM"}
      */
     public function __invoke(LoginRequest $request)
     {

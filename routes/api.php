@@ -27,6 +27,13 @@ Route::get('travels/{travel:slug}/tours', [TourController::class, 'index']);
 
 Route::post('login', LoginController::class)->name('login');
 Route::get('test', function () {
+    /**
+     * GET Test 
+     * 
+     * create test user
+     * 
+     * 
+     */
     return $user = App\Models\User::factory()->create();
 
 });
