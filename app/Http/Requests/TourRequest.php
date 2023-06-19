@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
 class TourRequest extends FormRequest
@@ -14,7 +14,7 @@ class TourRequest extends FormRequest
             'error' => $validator->errors(),
         ], 422));
     }
-    
+
     public function authorize(): bool
     {
         return true;
@@ -30,7 +30,7 @@ class TourRequest extends FormRequest
         return [
             'name' => 'required',
             'starting_date' => ['required', 'date'],
-            'ending_date' => ['required','date','after:starting_date'],
+            'ending_date' => ['required', 'date', 'after:starting_date'],
             'price' => ['required', 'numeric'],
         ];
     }

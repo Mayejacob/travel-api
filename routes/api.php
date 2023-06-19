@@ -4,9 +4,9 @@ use App\Http\Controllers\Api\V1\Admin\AdminTourController;
 use App\Http\Controllers\Api\V1\Admin\AdminTravelController;
 use App\Http\Controllers\Api\V1\Auth\LoginController;
 use App\Http\Controllers\Api\v1\TourController;
+use App\Http\Controllers\Api\V1\TravelController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\V1\TravelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,12 +26,12 @@ Route::get('travels', [TravelController::class, 'index']);
 Route::get('travels/{travel:slug}/tours', [TourController::class, 'index']);
 
 Route::post('login', LoginController::class)->name('login');
-Route::get('test', function(){
+Route::get('test', function () {
     return $user = App\Models\User::factory()->create();
-        
+
 });
-Route::prefix('admin')->middleware(['auth:sanctum'])->group(function (){
-    Route::middleware('role:admin')->group(function(){
+Route::prefix('admin')->middleware(['auth:sanctum'])->group(function () {
+    Route::middleware('role:admin')->group(function () {
         Route::post('travels', [AdminTravelController::class, 'store']);
         Route::post('travels/{travel}/tours', [AdminTourController::class, 'store']);
     });

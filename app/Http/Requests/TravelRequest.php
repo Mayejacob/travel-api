@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
 class TravelRequest extends FormRequest
@@ -17,6 +17,7 @@ class TravelRequest extends FormRequest
             'error' => $validator->errors(),
         ], 422));
     }
+
     public function authorize(): bool
     {
         return true;

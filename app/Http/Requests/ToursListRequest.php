@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Validation\Rule;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
 class ToursListRequest extends FormRequest
 {
@@ -28,17 +28,19 @@ class ToursListRequest extends FormRequest
             'error' => $validator->errors(),
         ], 422));
     }
+
     public function rules(): array
     {
         return [
-                'priceFrom' => 'numeric',
-                'priceTo' => 'numeric',
-                'dateFrom' => 'date',
-                'dateTo' => 'date',
-                'sortBy' => Rule::in(['price']),
-                'sortOrder' => Rule::in(['asc', 'desc']),
+            'priceFrom' => 'numeric',
+            'priceTo' => 'numeric',
+            'dateFrom' => 'date',
+            'dateTo' => 'date',
+            'sortBy' => Rule::in(['price']),
+            'sortOrder' => Rule::in(['asc', 'desc']),
         ];
     }
+
     public function messages()
     {
         return [

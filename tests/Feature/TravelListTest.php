@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Models\Travel;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class TravelListTest extends TestCase
@@ -21,6 +20,7 @@ class TravelListTest extends TestCase
         $response->assertJsonCount(15, 'data');
         $response->assertJsonPath('meta.last_page', 2);
     }
+
     public function test_travels_list_show_only_public_records(): void
     {
         $publicTravel = Travel::factory()->create(['is_public' => true]);
